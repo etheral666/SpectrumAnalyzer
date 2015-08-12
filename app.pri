@@ -1,3 +1,5 @@
+#qmake data for QT gui application targets
+
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TEMPLATE = app

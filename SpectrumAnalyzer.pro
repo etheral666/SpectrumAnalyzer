@@ -16,4 +16,5 @@ equals(TARGET, SpectrumAnalyzerUt) {
 
 DISTFILES += \
     common.pri \
-    app.pri
+    app.pri \
+    ut.pri
