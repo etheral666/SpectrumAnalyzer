@@ -4,7 +4,9 @@ INCLUDEPATH += tests
 
 SOURCES += \
     $$PWD/main/mainUt.cpp \
-    $$PWD/tests/FftwWrapperTests.cpp
+    $$PWD/tests/FftwWrapperTests.cpp \
+    $$PWD/tests/FrameAnalyzerTests.cpp \
+    $$PWD/tests/PlotInputTests.cpp
 
 
 HEADERS += \
