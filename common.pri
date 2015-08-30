@@ -1,28 +1,26 @@
-#qmake info for common targets
+#qmake input for common targets
 
-QT       += core gui
+QT += core
 
-INCLUDEPATH += \
-    $$PWD/gui \
-    $$PWD/main \
-    $$PWD/source \
-    $$PWD/tests \
-    $$PWD/externals
+INCLUDEPATH += $$PWD/gui
+INCLUDEPATH += $$PWD/main
+INCLUDEPATH += $$PWD/source
+INCLUDEPATH += $$PWD/tests
+INCLUDEPATH += $$PWD/externals
 
 
-HEADERS += \
-    $$PWD/source/FrameAnalyzer.hpp \
-    $$PWD/source/Fftw.hpp \
-    $$PWD/source/FftwWrapper.hpp \
-    $$PWD/source/IFftw.hpp \
-    $$PWD/source/PlotInput.hpp
+HEADERS += $$PWD/source/FrameAnalyzer.hpp
+HEADERS += $$PWD/source/Fftw.hpp
+HEADERS += $$PWD/source/FftwWrapper.hpp
+HEADERS += $$PWD/source/IFftw.hpp
+HEADERS += $$PWD/source/PlotInput.hpp
 
-SOURCES += \
-    $$PWD/source/FrameAnalyzer.cpp \
-    $$PWD/source/FftwWrapper.cpp \
-    $$PWD/source/PlotInput.cpp
+SOURCES += $$PWD/source/FrameAnalyzer.cpp
+SOURCES += $$PWD/source/FftwWrapper.cpp
+SOURCES += $$PWD/source/PlotInput.cpp
 
-INCLUDEPATH += D:\CppLibs\fftw-3.3.4\fftw-3.3.4-dll64
-INCLUDEPATH += D:\CppLibs\boost_1_57_0
+# external includes and libraries
+INCLUDEPATH += $$PWD/../../../CppLibs/fftw-3.3.4/fftw-3.3.4-dll64
+INCLUDEPATH += $$PWD/../../../CppLibs/boost_1_57_0
 
-LIBS += -LD:\CppLibs\fftw-3.3.4\fftw-3.3.4-dll64 -lfftw3-3
+LIBS += -L$$PWD/../../../CppLibs/fftw-3.3.4/fftw-3.3.4-dll64 -lfftw3-3

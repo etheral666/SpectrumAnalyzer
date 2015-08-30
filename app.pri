@@ -1,15 +1,17 @@
-#qmake data for QT gui application targets
+#qmake input for QT gui application targets
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
+QT += gui
+
 TEMPLATE = app
 
-SOURCES += main/main.cpp \
-    gui/MainWindow.cpp \
-    externals/qcustomplot.cpp \
+SOURCES += main/main.cpp
+SOURCES +=  gui/MainWindow.cpp
+SOURCES +=  externals/qcustomplot.cpp
 
-HEADERS  += gui/MainWindow.hpp \
-    externals/qcustomplot.h \
+HEADERS += gui/MainWindow.hpp
+HEADERS += externals/qcustomplot.h
 
-FORMS    += gui/MainWindow.ui
+FORMS   += gui/MainWindow.ui
 
