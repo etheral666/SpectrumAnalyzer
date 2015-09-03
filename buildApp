@@ -1,0 +1,3 @@
+#!/bin/bash
+ls *pro|xargs qmake -r "CONFIG += release" "TARGET = SpectrumAnalyzer" && make -j4
+

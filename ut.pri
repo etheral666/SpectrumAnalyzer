@@ -25,10 +25,10 @@ win32: {
     INCLUDEPATH += $$PWD/../gmock-1.6.0/gtest/include
     DEPENDPATH += $$PWD/../gmock-1.6.0/gtest/include
 
-    LIBS += -L$$PWD/../gmock-1.6.0/ -lgmock
+    LIBS += -L$$PWD/../gmock-1.6.0/gmock_build -lgmock
 
     INCLUDEPATH += $$PWD/../gmock-1.6.0/include
     DEPENDPATH += $$PWD/../gmock-1.6.0/include
 
-    PRE_TARGETDEPS += $$PWD/../gmock-1.6.0/libgmock.a
+    PRE_TARGETDEPS += $$PWD/../gmock-1.6.0/gmock_build/libgmock.a
 }

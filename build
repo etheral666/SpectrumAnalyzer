@@ -1,3 +1,0 @@
-#!/bin/bash
-ls *pro|xargs qmake && make -j4
-

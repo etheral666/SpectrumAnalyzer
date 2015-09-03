@@ -1,14 +1,14 @@
-Release:DESTDIR = $$PWD/bin
-Release:OBJECTS_DIR = $$PWD/bin/release
-Release:MOC_DIR = $$PWD/bin/release
-Release:RCC_DIR = $$PWD/bin/release
-Release:UI_DIR = $$PWD/bin/release
+release: DESTDIR = $$PWD/bin
+release: OBJECTS_DIR = $$PWD/bin/release
+release: MOC_DIR = $$PWD/bin/release
+release: RCC_DIR = $$PWD/bin/release
+release: UI_DIR = $$PWD/bin/release
 
-Debug:DESTDIR = $$PWD/bin
-Debug:OBJECTS_DIR = $$PWD/bin/debug
-Debug:MOC_DIR = $$PWD/bin/debug
-Debug:RCC_DIR = $$PWD/bin/debug
-Debug:UI_DIR = $$PWD/bin/debug
+debug: DESTDIR = $$PWD/bin
+debug: OBJECTS_DIR = $$PWD/bin/debug
+debug: MOC_DIR = $$PWD/bin/debug
+debug: RCC_DIR = $$PWD/bin/debug
+debug: UI_DIR = $$PWD/bin/debug
 
 include(common.pri)
 
@@ -23,3 +23,5 @@ equals(TARGET, SpectrumAnalyzerUt) {
 DISTFILES += common.pri
 DISTFILES += app.pri
 DISTFILES += ut.pri
+
+QMAKE_CLEAN += -r $$PWD/bin $$PWD/Makefile

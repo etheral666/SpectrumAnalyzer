@@ -20,7 +20,13 @@ SOURCES += $$PWD/source/FftwWrapper.cpp
 SOURCES += $$PWD/source/PlotInput.cpp
 
 # external includes and libraries
-INCLUDEPATH += $$PWD/../../../CppLibs/fftw-3.3.4/fftw-3.3.4-dll64
-INCLUDEPATH += $$PWD/../../../CppLibs/boost_1_57_0
+win32: {
+    INCLUDEPATH += $$PWD/../../../CppLibs/fftw-3.3.4/fftw-3.3.4-dll64
+    INCLUDEPATH += $$PWD/../../../CppLibs/boost_1_57_0
 
-LIBS += -L$$PWD/../../../CppLibs/fftw-3.3.4/fftw-3.3.4-dll64 -lfftw3-3
+    LIBS += -L$$PWD/../../../CppLibs/fftw-3.3.4/fftw-3.3.4-dll64 -lfftw3-3
+} else:unix:{
+    INCLUDEPATH += $$PWD/../boost_1_57_0
+
+    LIBS += -lfftw3
+}
