@@ -2,10 +2,10 @@
 
 INCLUDEPATH += tests
 
-SOURCES += $$PWD/main/mainUt.cpp
-SOURCES += $$PWD/tests/FftwWrapperTests.cpp
-SOURCES += $$PWD/tests/FrameAnalyzerTests.cpp
-SOURCES += $$PWD/tests/PlotInputTests.cpp
+SOURCES += $$PWD/main/mainUt.cpp \
+           $$PWD/tests/FftwWrapperTests.cpp \
+           $$PWD/tests/AbsDataTests.cpp \
+           $$PWD/tests/HoldMaxDataTests.cpp
 
 HEADERS += $$PWD/tests/FftwWrapperMock.hpp
 

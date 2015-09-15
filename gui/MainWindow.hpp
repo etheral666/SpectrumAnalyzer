@@ -2,6 +2,7 @@
 #define MAINWINDOW_HPP
 
 #include <QMainWindow>
+#include "qwt_plot.h"
 
 namespace Ui {
 class MainWindow;
