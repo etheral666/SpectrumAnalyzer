@@ -11,17 +11,15 @@ INCLUDEPATH += $$PWD/gui \
                $$PWD/externals
 
 
-HEADERS += \
-           $$PWD/source/Fftw.hpp \
+HEADERS += $$PWD/source/Fftw.hpp \
            $$PWD/source/FftwWrapper.hpp \
            $$PWD/source/IFftw.hpp \
            $$PWD/source/AbsData.hpp \
            $$PWD/source/IBasePlotData.hpp \
            $$PWD/source/HoldMaxData.hpp \
-    $$PWD/source/Types.hpp
+           $$PWD/source/Types.hpp
 
-SOURCES += \
-           $$PWD/source/FftwWrapper.cpp \
+SOURCES += $$PWD/source/FftwWrapper.cpp \
            $$PWD/source/AbsData.cpp \
            $$PWD/source/HoldMaxData.cpp
 

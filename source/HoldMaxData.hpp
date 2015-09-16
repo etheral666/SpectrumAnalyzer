@@ -12,7 +12,11 @@
 class HoldMaxData : public IBasePlotData
 {
 public:
-    HoldMaxData(int bufferSize, c64* rawData, QVector<QPointF>& holdMaxBuffer);
+    HoldMaxData(int               bufferSize,
+                c64*              rawData,
+                QVector<QPointF>& holdMaxBuffer,
+                double            startFreq,
+                double            freqStep);
 
     virtual void ResetValues();
     virtual void UpdateValues();

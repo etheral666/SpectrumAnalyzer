@@ -12,7 +12,11 @@
 class AbsData : public IBasePlotData
 {
 public:
-    AbsData(int buffersSize, std::complex<double>* rawData, QVector<QPointF>& absOutput);
+    AbsData(int               buffersSize,
+            c64*              rawData,
+            QVector<QPointF>& absOutput,
+            double            startFrequency,
+            double            frequencyStep);
 
     virtual void ResetValues();
     virtual void UpdateValues();
