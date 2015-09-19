@@ -7,27 +7,27 @@
 #include <QVector>
 #include <QPointF>
 
-#include "HoldMaxData.hpp"
+#include "HoldMaxBuffer.hpp"
 #include "Types.hpp"
 
 using namespace testing;
 
 #define BUFFERS_SIZE 1024
 
-class HoldMaxDataTests : public Test
+class HoldMaxDataTest : public Test
 {
 public:
-    HoldMaxDataTests()
+    HoldMaxDataTest()
         : startFrequency(1000.0),
           frequencyStep(500.0)
     {
         std::fill(rawData, rawData + BUFFERS_SIZE, c64(0, 0));
         holdMaxBuffer.insert(holdMaxBuffer.end(), BUFFERS_SIZE, QPointF(1, 1));
-        holdMaxData.reset(new HoldMaxData(BUFFERS_SIZE,
-                                          rawData,
-                                          holdMaxBuffer,
-                                          startFrequency,
-                                          frequencyStep));
+        holdMaxData.reset(new HoldMaxBuffer(BUFFERS_SIZE,
+                                            rawData,
+                                            holdMaxBuffer,
+                                            startFrequency,
+                                            frequencyStep));
         CheckBufferInitialization();
     }
 
@@ -63,12 +63,12 @@ protected:
     const double startFrequency;
     const double frequencyStep;
 
-    c64                            rawData[BUFFERS_SIZE];
-    QVector<QPointF>               holdMaxBuffer;
-    boost::scoped_ptr<HoldMaxData> holdMaxData;
+    c64                              rawData[BUFFERS_SIZE];
+    QVector<QPointF>                 holdMaxBuffer;
+    boost::scoped_ptr<HoldMaxBuffer> holdMaxData;
 };
 
-TEST_F(HoldMaxDataTests, HoldMaxUpdateOneValue)
+TEST_F(HoldMaxDataTest, HoldMaxUpdateOneValue)
 {
     const int maxValueIdx = BUFFERS_SIZE / 2;
     rawData[maxValueIdx] = c64(100.0, 100.0);
@@ -92,7 +92,7 @@ TEST_F(HoldMaxDataTests, HoldMaxUpdateOneValue)
 
 }
 
-TEST_F(HoldMaxDataTests, HoldMaxUpdateAllValues)
+TEST_F(HoldMaxDataTest, HoldMaxUpdateAllValues)
 {
     const c64 maxSample = c64(100.0, 100.0);
     std::fill(rawData, rawData + BUFFERS_SIZE, maxSample);
@@ -102,26 +102,7 @@ TEST_F(HoldMaxDataTests, HoldMaxUpdateAllValues)
     CheckBuffer(refMax, startFrequency, frequencyStep);
 }
 
-TEST_F(HoldMaxDataTests, ResetMaxValues)
-{
-    UpdateHoldMaxValues(c64(5, 5));
-    const double refValue = 0.0;
-
-    holdMaxData->ResetValues();
-    CheckBuffer(refValue, startFrequency, frequencyStep);
-}
-
-TEST_F(HoldMaxDataTests, UpdateFrequencies)
-{
-    const double refValue  = 0.0;
-    const double startFreq = 2 * startFrequency;
-    const double freqStep  = 2 * frequencyStep;
-
-    holdMaxData->UpdateFrequencies(startFreq, freqStep);
-    CheckBuffer(refValue, startFreq, freqStep);
-}
-
-TEST_F(HoldMaxDataTests, FindingGlobalMax)
+TEST_F(HoldMaxDataTest, FindingGlobalMax)
 {
     const c64 maxSample       = c64(100.0, 100.0);
     rawData[BUFFERS_SIZE / 2] = maxSample;

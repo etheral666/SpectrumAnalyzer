@@ -4,8 +4,10 @@ INCLUDEPATH += tests
 
 SOURCES += $$PWD/main/mainUt.cpp \
            $$PWD/tests/FftwWrapperTests.cpp \
-           $$PWD/tests/AbsDataTests.cpp \
-           $$PWD/tests/HoldMaxDataTests.cpp
+           $$PWD/tests/PhaseBufferTests.cpp \
+           $$PWD/tests/HoldMaxBufferTests.cpp \
+           $$PWD/tests/AbsBufferTests.cpp \
+           $$PWD/tests/BasePlotBufferTests.cpp
 
 HEADERS += $$PWD/tests/FftwWrapperMock.hpp
 

@@ -2,14 +2,10 @@
 #define FFTW_WRAPPER_HPP
 
 #include "IFftw.hpp"
-
-#include <complex>
+#include "Types.hpp"
 
 class FftwWrapper
 {
-private:
-    typedef std::complex<double> c64;
-
 public:
     FftwWrapper(IFftw& fftw, int fftSize, c64* input, c64* output, int fftSign, unsigned int fftFlags);
     ~FftwWrapper();

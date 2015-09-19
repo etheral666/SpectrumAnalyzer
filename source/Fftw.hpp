@@ -1,9 +1,9 @@
 #ifndef FFTW_HPP
 #define FFTW_HPP
 
-#include "IFftw.hpp"
-
 #include "fftw3.h"
+
+#include "IFftw.hpp"
 
 class Fftw : public IFftw
 {

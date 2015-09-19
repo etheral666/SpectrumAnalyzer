@@ -14,14 +14,17 @@ INCLUDEPATH += $$PWD/gui \
 HEADERS += $$PWD/source/Fftw.hpp \
            $$PWD/source/FftwWrapper.hpp \
            $$PWD/source/IFftw.hpp \
-           $$PWD/source/AbsData.hpp \
-           $$PWD/source/IBasePlotData.hpp \
-           $$PWD/source/HoldMaxData.hpp \
-           $$PWD/source/Types.hpp
+           $$PWD/source/Types.hpp \
+           $$PWD/source/BasePlotBuffer.hpp \
+           $$PWD/source/AbsBuffer.hpp \
+           $$PWD/source/HoldMaxBuffer.hpp \
+           $$PWD/source/PhaseBuffer.hpp
 
 SOURCES += $$PWD/source/FftwWrapper.cpp \
-           $$PWD/source/AbsData.cpp \
-           $$PWD/source/HoldMaxData.cpp
+           $$PWD/source/BasePlotBuffer.cpp \
+           $$PWD/source/AbsBuffer.cpp \
+           $$PWD/source/HoldMaxBuffer.cpp \
+           $$PWD/source/PhaseBuffer.cpp
 
 # external includes and libraries
 win32: {

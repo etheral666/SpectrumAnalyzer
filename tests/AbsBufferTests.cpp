@@ -7,27 +7,27 @@
 #include <QVector>
 #include <QPointF>
 
-#include "AbsData.hpp"
+#include "AbsBuffer.hpp"
 #include "Types.hpp"
 
 #define BUFFERS_SIZE 1024
 
 using namespace testing;
 
-class AbsPlotDataTests : public Test
+class AbsPlotDataTest : public Test
 {
 public:
-    AbsPlotDataTests()
+    AbsPlotDataTest()
         : startFrequency(1000.0),
           frequencyStep(500.0)
     {
         std::fill(rawData, rawData + BUFFERS_SIZE, c64(1, 1));
         absBuffer.insert(absBuffer.end(), BUFFERS_SIZE, QPointF(1, 1));
-        absData.reset(new AbsData(BUFFERS_SIZE,
-                                  rawData,
-                                  absBuffer,
-                                  startFrequency,
-                                  frequencyStep));
+        absData.reset(new AbsBuffer(BUFFERS_SIZE,
+                                    rawData,
+                                    absBuffer,
+                                    startFrequency,
+                                    frequencyStep));
 
         CheckBufferInitialization();
     }
@@ -64,12 +64,12 @@ protected:
     const double startFrequency;
     const double frequencyStep;
 
-    c64                        rawData[BUFFERS_SIZE];
-    QVector<QPointF>           absBuffer;
-    boost::scoped_ptr<AbsData> absData;
+    c64                          rawData[BUFFERS_SIZE];
+    QVector<QPointF>             absBuffer;
+    boost::scoped_ptr<AbsBuffer> absData;
 };
 
-TEST_F(AbsPlotDataTests, UpdateMagnitudeValues)
+TEST_F(AbsPlotDataTest, UpdateMagnitudeValues)
 {
     UpdateAbsValues(c64(5, 5));
     const double refVal = std::abs(c64(5, 5));
@@ -77,26 +77,7 @@ TEST_F(AbsPlotDataTests, UpdateMagnitudeValues)
     CheckBuffer(refVal, startFrequency, frequencyStep);
 }
 
-TEST_F(AbsPlotDataTests, ResetMagnitudeValues)
-{
-    UpdateAbsValues(c64(5, 5));
-    absData->ResetValues();
-    const double refVal = 0.0;
-
-    CheckBuffer(refVal, startFrequency, frequencyStep);
-}
-
-TEST_F(AbsPlotDataTests, UpdateFrequencyValues)
-{
-    const double startFreq = 2 * startFrequency;
-    const double freqStep  = 2 * frequencyStep;
-    absData->UpdateFrequencies(startFreq, freqStep);
-    const double refVal = 0.0;
-
-    CheckBuffer(refVal, startFreq, freqStep);
-}
-
-TEST_F(AbsPlotDataTests, FindGlobalMax)
+TEST_F(AbsPlotDataTest, FindGlobalMax)
 {
     const int maxValueIdx  = BUFFERS_SIZE / 2;
     rawData[maxValueIdx]   = c64(100.0, 100.0);
