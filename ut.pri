@@ -1,15 +1,19 @@
 #qmake input for unit tests
 
-INCLUDEPATH += tests
+INCLUDEPATH += tests \
+               tests/TestTools
 
 SOURCES += $$PWD/main/mainUt.cpp \
-           $$PWD/tests/FftwWrapperTests.cpp \
-           $$PWD/tests/PhaseBufferTests.cpp \
-           $$PWD/tests/HoldMaxBufferTests.cpp \
-           $$PWD/tests/AbsBufferTests.cpp \
-           $$PWD/tests/BasePlotBufferTests.cpp
+           $$PWD/tests/UnitTests/FftwWrapperTests.cpp \
+           $$PWD/tests/UnitTests/PhaseBufferTests.cpp \
+           $$PWD/tests/UnitTests/HoldMaxBufferTests.cpp \
+           $$PWD/tests/UnitTests/AbsBufferTests.cpp \
+           $$PWD/tests/UnitTests/BasePlotBufferTests.cpp \
+           $$PWD/tests/UnitTests/FakeAntennaTests.cpp \
+           $$PWD/tests/TestTools/FakeAntenna.cpp
 
-HEADERS += $$PWD/tests/FftwWrapperMock.hpp
+HEADERS += $$PWD/tests/UnitTests/FftwWrapperMock.hpp \
+           $$PWD/tests/TestTools/FakeAntenna.hpp
 
 #google test's libraries
 win32: {

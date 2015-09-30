@@ -18,7 +18,10 @@ HEADERS += $$PWD/source/Fftw.hpp \
            $$PWD/source/BasePlotBuffer.hpp \
            $$PWD/source/AbsBuffer.hpp \
            $$PWD/source/HoldMaxBuffer.hpp \
-           $$PWD/source/PhaseBuffer.hpp
+           $$PWD/source/PhaseBuffer.hpp \
+           $$PWD/source/IDataProvider.hpp \
+           $$PWD/source/IDataReceiver.hpp \
+           $$PWD/source/Constants.hpp
 
 SOURCES += $$PWD/source/FftwWrapper.cpp \
            $$PWD/source/BasePlotBuffer.cpp \

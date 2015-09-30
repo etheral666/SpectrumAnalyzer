@@ -1,14 +1,14 @@
-release: DESTDIR = $$PWD/bin
+release: DESTDIR     = $$PWD/bin
 release: OBJECTS_DIR = $$PWD/bin/release
-release: MOC_DIR = $$PWD/bin/release
-release: RCC_DIR = $$PWD/bin/release
-release: UI_DIR = $$PWD/bin/release
+release: MOC_DIR     = $$PWD/bin/release
+release: RCC_DIR     = $$PWD/bin/release
+release: UI_DIR      = $$PWD/bin/release
 
-debug: DESTDIR = $$PWD/bin
+debug: DESTDIR     = $$PWD/bin
 debug: OBJECTS_DIR = $$PWD/bin/debug
-debug: MOC_DIR = $$PWD/bin/debug
-debug: RCC_DIR = $$PWD/bin/debug
-debug: UI_DIR = $$PWD/bin/debug
+debug: MOC_DIR     = $$PWD/bin/debug
+debug: RCC_DIR     = $$PWD/bin/debug
+debug: UI_DIR      = $$PWD/bin/debug
 
 include(common.pri)
 
