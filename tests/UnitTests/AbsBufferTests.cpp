@@ -84,6 +84,6 @@ TEST_F(AbsPlotDataTest, FindGlobalMax)
     const double refMaxAbs = std::abs(rawData[maxValueIdx]);
 
     absData->UpdateValues();
-    EXPECT_DOUBLE_EQ(refMaxAbs, absData->GetGlobalMax());
+    EXPECT_FLOAT_EQ(refMaxAbs, absData->GetGlobalMax());
 }
 

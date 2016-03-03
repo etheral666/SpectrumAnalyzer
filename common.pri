@@ -41,8 +41,10 @@ win32: {
     DEPENDPATH += $$PWD/../../../CppLibs/Qwt-6.1.2/include
 } else:unix: {
     INCLUDEPATH += $$PWD/../boost_1_57_0
+    INCLUDEPATH += /usr/local/qwt-6.1.2/include
 
     LIBS += -lfftw3
+    LIBS += -L/usr/local/qwt-6.1.2/lib -lqwt
 }
 
 

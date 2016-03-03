@@ -109,5 +109,5 @@ TEST_F(HoldMaxDataTest, FindingGlobalMax)
     const double refMax       = std::abs(maxSample);
 
     holdMaxData->UpdateValues();
-    EXPECT_DOUBLE_EQ(refMax, holdMaxData->GetGlobalMax());
+    EXPECT_FLOAT_EQ(refMax, holdMaxData->GetGlobalMax());
 }
