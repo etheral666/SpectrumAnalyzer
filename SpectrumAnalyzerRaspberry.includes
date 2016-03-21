@@ -1,0 +1,4 @@
+bin/debug
+.
+source
+tests/UnitTests

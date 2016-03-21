@@ -21,30 +21,25 @@ HEADERS += $$PWD/source/Fftw.hpp \
            $$PWD/source/PhaseBuffer.hpp \
            $$PWD/source/IDataProvider.hpp \
            $$PWD/source/IDataReceiver.hpp \
-           $$PWD/source/Constants.hpp
+           $$PWD/source/Constants.hpp \
+           $$PWD/source/HackRfInterface.hpp
 
 SOURCES += $$PWD/source/FftwWrapper.cpp \
            $$PWD/source/BasePlotBuffer.cpp \
            $$PWD/source/AbsBuffer.cpp \
            $$PWD/source/HoldMaxBuffer.cpp \
-           $$PWD/source/PhaseBuffer.cpp
+           $$PWD/source/PhaseBuffer.cpp \
+           $$PWD/source/HackRfInterface.cpp
 
 # external includes and libraries
-win32: {
-    INCLUDEPATH += $$PWD/../../../CppLibs/fftw-3.3.4/fftw-3.3.4-dll64
-    INCLUDEPATH += $$PWD/../../../CppLibs/boost_1_57_0
-
-    win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../../../CppLibs/Qwt-6.1.2/lib/ -lqwt
-    else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../../../CppLibs/Qwt-6.1.2/lib/ -lqwtd
-
-    INCLUDEPATH += $$PWD/../../../CppLibs/Qwt-6.1.2/include
-    DEPENDPATH += $$PWD/../../../CppLibs/Qwt-6.1.2/include
-} else:unix: {
+unix: {
     INCLUDEPATH += $$PWD/../boost_1_57_0
     INCLUDEPATH += /usr/local/qwt-6.1.2/include
+    INCLUDEPATH += $$PWD/externals/ibhackrf/src
 
     LIBS += -lfftw3
     LIBS += -L/usr/local/qwt-6.1.2/lib -lqwt
+    LIBS += -L externals/libharckrf/lib
 }
 
 
