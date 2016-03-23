@@ -9,21 +9,21 @@ SOURCES += $$PWD/main/mainUt.cpp \
            $$PWD/tests/UnitTests/HoldMaxBufferTests.cpp \
            $$PWD/tests/UnitTests/AbsBufferTests.cpp \
            $$PWD/tests/UnitTests/BasePlotBufferTests.cpp \
-           $$PWD/tests/UnitTests/FakeAntennaTests.cpp \
-           $$PWD/tests/TestTools/FakeAntenna.cpp
+#           $$PWD/tests/UnitTests/FakeAntennaTests.cpp \
+#           $$PWD/tests/TestTools/FakeAntenna.cpp \
+           $$PWD/tests/UnitTests/HackRfInterfaceTests.cpp
 
 HEADERS += $$PWD/tests/UnitTests/FftwWrapperMock.hpp \
            $$PWD/tests/TestTools/FakeAntenna.hpp
 
 #google test's libraries
-unix: {
-    INCLUDEPATH += $$PWD/../gmock-1.6.0/gtest/include
-    DEPENDPATH += $$PWD/../gmock-1.6.0/gtest/include
+INCLUDEPATH += $$PWD/externals/gmock-1.6.0/gtest/include
+DEPENDPATH += $$PWD/externals/gmock-1.6.0/gtest/include
 
-    LIBS += -L$$PWD/../gmock-1.6.0/gmock_build -lgmock
+LIBS += -L$$PWD/externals/gmock-1.6.0/gmock_build -lgmock
 
-    INCLUDEPATH += $$PWD/../gmock-1.6.0/include
-    DEPENDPATH += $$PWD/../gmock-1.6.0/include
+INCLUDEPATH += $$PWD/externals/gmock-1.6.0/include
+DEPENDPATH += $$PWD/externals/gmock-1.6.0/include
 
-    PRE_TARGETDEPS += $$PWD/../gmock-1.6.0/gmock_build/libgmock.a
-}
+PRE_TARGETDEPS += $$PWD/externals/gmock-1.6.0/gmock_build/libgmock.a
+

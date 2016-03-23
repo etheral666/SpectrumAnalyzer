@@ -32,15 +32,14 @@ SOURCES += $$PWD/source/FftwWrapper.cpp \
            $$PWD/source/HackRfInterface.cpp
 
 # external includes and libraries
-unix: {
-    INCLUDEPATH += $$PWD/../boost_1_57_0
-    INCLUDEPATH += /usr/local/qwt-6.1.2/include
-    INCLUDEPATH += $$PWD/externals/ibhackrf/src
+INCLUDEPATH += $$PWD/externals/boost_1_57_0/
+INCLUDEPATH += $$PWD/externals/qwt-6.1.2/include
+INCLUDEPATH += $$PWD/externals/libhackrf/src
 
-    LIBS += -lfftw3
-    LIBS += -L/usr/local/qwt-6.1.2/lib -lqwt
-    LIBS += -L externals/libharckrf/lib
-}
+LIBS += -lfftw3
+LIBS += -L./externalsqwt-6.1.2/lib -lqwt
+LIBS += -L./externals/libharckrf/lib -lhackrf
+
 
 
 
