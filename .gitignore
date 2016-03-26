@@ -24,4 +24,8 @@ Makefile*
 *.autosave
 *.diff
 object_script*
-
+SpectrumAnalyzerRaspberry.creator
+SpectrumAnalyzerRaspberry.files
+SpectrumAnalyzerRaspberry.config
+SpectrumAnalyzerRaspberry.creator.user
+SpectrumAnalyzerRaspberry.includes
