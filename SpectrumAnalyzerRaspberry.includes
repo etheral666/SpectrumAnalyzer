@@ -2,3 +2,8 @@ bin/debug
 .
 source
 tests/UnitTests
+externals/libhackrf/src
+externals/qwt-6.1.2/include
+externals/gmock-1.6.0/gtest
+externals/gmock-1.6.0
+externals/boost_1_57_0/boost
