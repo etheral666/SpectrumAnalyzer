@@ -34,10 +34,10 @@ SOURCES += $$PWD/source/FftwWrapper.cpp \
 # external includes and libraries
 INCLUDEPATH += $$PWD/externals/boost_1_57_0/
 INCLUDEPATH += $$PWD/externals/qwt-6.1.2/include
-INCLUDEPATH += $$PWD/externals/libhackrf/src
+INCLUDEPATH += ./externals/libhackrf/src
 
 LIBS += -lfftw3
-LIBS += -L./externalsqwt-6.1.2/lib -lqwt
+LIBS += -L./externals/qwt-6.1.2/lib -lqwt
 LIBS += -L./externals/libharckrf/lib -lhackrf
 
 
