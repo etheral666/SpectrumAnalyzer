@@ -5,6 +5,7 @@
 
 #include <string>
 #include <sstream>
+#include <stdint.h>
 
 enum EHackRfState
 {
@@ -16,12 +17,16 @@ enum EHackRfState
     Transmitting
 };
 
+struct AnalysisParameters;
+
 class HackRfInterface
 {
 public:
-    HackRfInterface();
+    HackRfInterface(hackrf_device** device, hackrf_sample_block_cb_fn callback);
 
     ~HackRfInterface();
+
+    bool SetAnalysisParameters(const AnalysisParameters& params);
 
     void StartReceiving();
 
@@ -47,17 +52,15 @@ private:
 
     bool IsReceiving() const
     {
-        return Receiving == m_state;
+        return Receiving == m_state && HACKRF_TRUE == hackrf_is_streaming(m_device);
     }
 
-    hackrf_transfer m_transferInfo;
-    hackrf_device*  m_device;
+    hackrf_device* m_device;
 
-    int          m_status;
     EHackRfState m_state;
     std::string  m_lastError;
-};
 
-int ReceiveCallback(hackrf_transfer* transfer);
+    int (*m_rxCallback)(hackrf_transfer*);
+};
 
 #endif // HACKRF_INTERFACE_HPP

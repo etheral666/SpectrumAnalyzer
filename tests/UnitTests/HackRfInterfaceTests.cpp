@@ -2,15 +2,25 @@
 
 #include <gtest/gtest.h>
 
-#include <cstring>
 #include <iostream>
+#include <stdint.h>
+#include <algorithm>
 
 using namespace testing;
+
+int TestReceiveCallback(hackrf_transfer* transfer)
+{
+    int32_t result = std::count(&transfer->buffer[0], &transfer->buffer[transfer->valid_length], 0);
+    EXPECT_NE(transfer->valid_length, result);
+    return 0;
+}
 
 class HackRfInterfaceTest : public Test
 {
 public:
     HackRfInterfaceTest()
+        : m_device(NULL),
+          m_hackRf(&m_device, TestReceiveCallback)
     {
         CheckInitialization();
     }
@@ -21,16 +31,29 @@ public:
     }
 
 protected:
+    static const int32_t rxBufferLenght = 4096;
+    static const int32_t frameLength    = 1024;
+
+    hackrf_device*  m_device;
     HackRfInterface m_hackRf;
+
+    uint8_t rxBuffer[rxBufferLenght];
 };
 
-TEST_F(HackRfInterfaceTest, StreamingStartingAndStopping)
+TEST_F(HackRfInterfaceTest, StartAndStopStreaming)
 {
     ASSERT_EQ(Connected, m_hackRf.CheckState()) << m_hackRf.GetLastErrorDescription();
 
     m_hackRf.StartReceiving();
     EXPECT_EQ(Receiving, m_hackRf.CheckState()) << m_hackRf.GetLastErrorDescription();
+    sleep(1);
 
     m_hackRf.StopReceiving();
     EXPECT_EQ(Connected, m_hackRf.CheckState()) << m_hackRf.GetLastErrorDescription();
+}
+
+TEST_F(HackRfInterfaceTest, StreamingData)
+{
+    m_hackRf.StartReceiving();
+    m_hackRf.StopReceiving();
 }
