@@ -31,13 +31,8 @@ public:
     }
 
 protected:
-    static const int32_t rxBufferLenght = 4096;
-    static const int32_t frameLength    = 1024;
-
     hackrf_device*  m_device;
     HackRfInterface m_hackRf;
-
-    uint8_t rxBuffer[rxBufferLenght];
 };
 
 TEST_F(HackRfInterfaceTest, StartAndStopStreaming)
