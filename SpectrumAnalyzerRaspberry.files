@@ -39,3 +39,5 @@ runut
 SpectrumAnalyzer.pro
 ut.pri
 tests/UnitTests/HackRfInterfaceTests.cpp
+source/AnalysisParameters.hpp
+source/Defaults.hpp

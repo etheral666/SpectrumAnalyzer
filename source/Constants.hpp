@@ -1,9 +1,11 @@
 #ifndef CONSTANTS_HPP
 #define CONSTANTS_HPP
 
-namespace Const
+#include <stdint.h>
+
+struct Const
 {
-    const int fftSize1024 = 1024;
+    static const int32_t fftSize1024 = 1024;
 }
 
 #endif // CONSTANTS_HPP
