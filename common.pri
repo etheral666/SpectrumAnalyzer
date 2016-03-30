@@ -9,6 +9,7 @@ INCLUDEPATH += $$PWD/gui \
                $$PWD/source \
                $$PWD/source/plots \
                $$PWD/source/fft \
+               $$PWD/source/dataProviders \
                $$PWD/tests \
                $$PWD/externals
 
@@ -24,14 +25,14 @@ HEADERS += $$PWD/source/fft/Fftw.hpp \
            $$PWD/source/IDataProvider.hpp \
            $$PWD/source/IDataReceiver.hpp \
            $$PWD/source/Constants.hpp \
-           $$PWD/source/HackRfInterface.hpp
+           $$PWD/source/dataProviders/HackRfInterface.hpp
 
 SOURCES += $$PWD/source/fft/FftwWrapper.cpp \
            $$PWD/source/plots/BasePlotBuffer.cpp \
            $$PWD/source/plots/AbsBuffer.cpp \
            $$PWD/source/plots/HoldMaxBuffer.cpp \
            $$PWD/source/plots/PhaseBuffer.cpp \
-           $$PWD/source/HackRfInterface.cpp
+           $$PWD/source/dataProviders/HackRfInterface.cpp
 
 # external includes and libraries
 INCLUDEPATH += $$PWD/externals/boost_1_57_0/
