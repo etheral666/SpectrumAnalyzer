@@ -17,22 +17,24 @@ INCLUDEPATH += $$PWD/gui \
 HEADERS += $$PWD/source/fft/Fftw.hpp \
            $$PWD/source/fft/FftwWrapper.hpp \
            $$PWD/source/fft/IFftw.hpp \
-           $$PWD/source/Types.hpp \
            $$PWD/source/plots/BasePlotBuffer.hpp \
            $$PWD/source/plots/AbsBuffer.hpp \
            $$PWD/source/plots/HoldMaxBuffer.hpp \
            $$PWD/source/plots/PhaseBuffer.hpp \
-           $$PWD/source/IDataProvider.hpp \
+           $$PWD/source/dataProviders/IDataProvider.hpp \
+           $$PWD/source/dataProviders/HackRfInterface.hpp \
+           $$PWD/source/dataProviders/SamplesAdapter.hpp \
            $$PWD/source/IDataReceiver.hpp \
-           $$PWD/source/Constants.hpp \
-           $$PWD/source/dataProviders/HackRfInterface.hpp
+           $$PWD/source/Types.hpp \
+           $$PWD/source/Constants.hpp
 
 SOURCES += $$PWD/source/fft/FftwWrapper.cpp \
            $$PWD/source/plots/BasePlotBuffer.cpp \
            $$PWD/source/plots/AbsBuffer.cpp \
            $$PWD/source/plots/HoldMaxBuffer.cpp \
            $$PWD/source/plots/PhaseBuffer.cpp \
-           $$PWD/source/dataProviders/HackRfInterface.cpp
+           $$PWD/source/dataProviders/HackRfInterface.cpp \
+           $$PWD/source/dataProviders/SamplesAdapter.cpp
 
 # external includes and libraries
 INCLUDEPATH += $$PWD/externals/boost_1_57_0/

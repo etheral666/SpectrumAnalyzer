@@ -11,7 +11,8 @@ SOURCES += $$PWD/main/mainUt.cpp \
            $$PWD/tests/UnitTests/BasePlotBufferTests.cpp \
 #           $$PWD/tests/UnitTests/FakeAntennaTests.cpp \
 #           $$PWD/tests/TestTools/FakeAntenna.cpp \
-           $$PWD/tests/UnitTests/HackRfInterfaceTests.cpp
+           $$PWD/tests/UnitTests/HackRfInterfaceTests.cpp \
+           $$PWD/tests/UnitTests/SamplesAdapterTests.cpp
 
 HEADERS += $$PWD/tests/UnitTests/FftwWrapperMock.hpp \
            $$PWD/tests/TestTools/FakeAntenna.hpp
