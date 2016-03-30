@@ -30,6 +30,7 @@ HackRfInterface::HackRfInterface(hackrf_device** device, hackrf_sample_block_cb_
 
     if(status == HACKRF_SUCCESS)
     m_state = Connected;
+
     *device = m_device;
 }
 

@@ -2,7 +2,6 @@
 
 #include <gtest/gtest.h>
 
-#include <iostream>
 #include <stdint.h>
 #include <algorithm>
 
@@ -11,7 +10,7 @@ using namespace testing;
 int TestReceiveCallback(hackrf_transfer* transfer)
 {
     int32_t result = std::count(&transfer->buffer[0], &transfer->buffer[transfer->valid_length], 0);
-    EXPECT_NE(transfer->valid_length, result);
+    EXPECT_NE(transfer->valid_length, result); // assert, that zeroed buffer means no transmission
     return 0;
 }
 
