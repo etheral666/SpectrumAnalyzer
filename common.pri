@@ -7,28 +7,30 @@ QT += core
 INCLUDEPATH += $$PWD/gui \
                $$PWD/main \
                $$PWD/source \
+               $$PWD/source/plots \
+               $$PWD/source/fft \
                $$PWD/tests \
                $$PWD/externals
 
 
-HEADERS += $$PWD/source/Fftw.hpp \
-           $$PWD/source/FftwWrapper.hpp \
-           $$PWD/source/IFftw.hpp \
+HEADERS += $$PWD/source/fft/Fftw.hpp \
+           $$PWD/source/fft/FftwWrapper.hpp \
+           $$PWD/source/fft/IFftw.hpp \
            $$PWD/source/Types.hpp \
-           $$PWD/source/BasePlotBuffer.hpp \
-           $$PWD/source/AbsBuffer.hpp \
-           $$PWD/source/HoldMaxBuffer.hpp \
-           $$PWD/source/PhaseBuffer.hpp \
+           $$PWD/source/plots/BasePlotBuffer.hpp \
+           $$PWD/source/plots/AbsBuffer.hpp \
+           $$PWD/source/plots/HoldMaxBuffer.hpp \
+           $$PWD/source/plots/PhaseBuffer.hpp \
            $$PWD/source/IDataProvider.hpp \
            $$PWD/source/IDataReceiver.hpp \
            $$PWD/source/Constants.hpp \
            $$PWD/source/HackRfInterface.hpp
 
-SOURCES += $$PWD/source/FftwWrapper.cpp \
-           $$PWD/source/BasePlotBuffer.cpp \
-           $$PWD/source/AbsBuffer.cpp \
-           $$PWD/source/HoldMaxBuffer.cpp \
-           $$PWD/source/PhaseBuffer.cpp \
+SOURCES += $$PWD/source/fft/FftwWrapper.cpp \
+           $$PWD/source/plots/BasePlotBuffer.cpp \
+           $$PWD/source/plots/AbsBuffer.cpp \
+           $$PWD/source/plots/HoldMaxBuffer.cpp \
+           $$PWD/source/plots/PhaseBuffer.cpp \
            $$PWD/source/HackRfInterface.cpp
 
 # external includes and libraries
