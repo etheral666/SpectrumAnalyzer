@@ -4,6 +4,8 @@ QT_VERSION = 4
 
 QT += core
 
+QMAKE_CXXFLAGS += -std=c++0x
+
 INCLUDEPATH += $$PWD/gui \
                $$PWD/main \
                $$PWD/source \
