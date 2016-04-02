@@ -24,10 +24,7 @@ DISTFILES += common.pri
 DISTFILES += app.pri
 DISTFILES += ut.pri
 
-win32 {
-    QMAKE_CLEAN += $$PWD/bin $$PWD/Makefile*
-} else:unix: {
-    QMAKE_CLEAN += -r $$PWD/bin $$PWD/Makefile
-}
+QMAKE_CLEAN += -r $$PWD/bin $$PWD/Makefile
+
 
 

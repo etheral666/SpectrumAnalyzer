@@ -40,7 +40,6 @@ TEST_F(HackRfInterfaceTest, StartAndStopStreaming)
 
     m_hackRf.StartReceiving();
     EXPECT_EQ(Receiving, m_hackRf.CheckState()) << m_hackRf.GetLastErrorDescription();
-    sleep(1);
 
     m_hackRf.StopReceiving();
     EXPECT_EQ(Connected, m_hackRf.CheckState()) << m_hackRf.GetLastErrorDescription();

@@ -34,7 +34,7 @@ public:
                                     int           sign,
                                     unsigned      flags)
     {
-        fftw_plan_dft_1d(n, input, output, sign, flags);
+        return fftw_plan_dft_1d(n, input, output, sign, flags);
     }
 };
 

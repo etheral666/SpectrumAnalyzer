@@ -28,9 +28,9 @@ public:
 
     bool SetAnalysisParameters(const AnalysisParameters& params);
 
-    void StartReceiving();
+    bool StartReceiving();
 
-    void StopReceiving();
+    bool StopReceiving();
 
     EHackRfState CheckState() const
     {

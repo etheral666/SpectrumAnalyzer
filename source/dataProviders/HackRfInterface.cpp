@@ -58,7 +58,7 @@ bool HackRfInterface::SetAnalysisParameters(const AnalysisParameters& params)
     return true;
 }
 
-void HackRfInterface::StartReceiving()
+bool HackRfInterface::StartReceiving()
 {
     if(IsConnected())
     {
@@ -66,15 +66,18 @@ void HackRfInterface::StartReceiving()
         if(result < 0)
         {
             SetErrorString("Receiving could not be started: ", result);
+            return false;
         }
         else
         {
             m_state = Receiving;
+            return true;
         }
     }
+    return false;
 }
 
-void HackRfInterface::StopReceiving()
+bool HackRfInterface::StopReceiving()
 {
     if(IsReceiving())
     {
@@ -83,12 +86,15 @@ void HackRfInterface::StopReceiving()
         {
             SetErrorString("Receiving could not be stopped correctly: ", result);
             m_state = UndefinedState;
+            return false;
         }
         else
         {
             m_state = Connected;
+            return true;
         }
     }
+    return false;
 }
 
 void HackRfInterface::SetErrorString(const std::string description, const int errCode)
