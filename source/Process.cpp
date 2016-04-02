@@ -33,7 +33,7 @@ void Process::Start()
     g_processNext = 1;
     if(m_hackRf.StartReceiving())
     {
-        while(g_processNext)
+        while(g_processNext != 0)
         {
 
         }
@@ -74,6 +74,10 @@ int TransferCallback(hackrf_transfer* transfer)
     int32_t processNext = 0;
     std::cout << "[TransferCallback] Continue? 0/1" << std::endl;
     std::cin >> processNext;
+    if(!processNext)
+    {
+        g_hackRfInterface->StopReceiving();
+    }
     g_processNext = processNext;
 
 //    g_hackRfInterface->StartReceiving();
