@@ -20,6 +20,10 @@ equals(TARGET, SpectrumAnalyzerUt) {
     include(ut.pri)
 }
 
+contains(CONFIG, NO_GUI) {
+    DEFINES += NO_GUI
+}
+
 DISTFILES += common.pri
 DISTFILES += app.pri
 DISTFILES += ut.pri
