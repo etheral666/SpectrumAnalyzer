@@ -8,8 +8,7 @@
 int main(int argc, char *argv[])
 {
 #ifdef NO_GUI
-    Process mainProcess;
-    mainProcess.Start();
+    //TODO
     return 0;
 #else
     QApplication a(argc, argv);
