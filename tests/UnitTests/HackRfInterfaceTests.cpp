@@ -7,6 +7,8 @@
 
 using namespace testing;
 
+extern hackrf_transfer g_lastTransferInfo;
+
 int TestReceiveCallback(hackrf_transfer* transfer)
 {
     int32_t result = std::count(&transfer->buffer[0], &transfer->buffer[transfer->valid_length], 0);
@@ -18,35 +20,32 @@ class HackRfInterfaceTest : public Test
 {
 public:
     HackRfInterfaceTest()
-        : m_device(NULL),
-          m_hackRf(&m_device, TestReceiveCallback)
     {
+        m_hackRf = HackRfInterface::GetInstance();
         CheckInitialization();
+    }
+
+    ~HackRfInterfaceTest()
+    {
+        EXPECT_EQ(Connected, m_hackRf->CheckState()) << m_hackRf->GetLastErrorDescription();
     }
 
     void CheckInitialization()
     {
-        ASSERT_EQ(Connected, m_hackRf.CheckState()) << m_hackRf.GetLastErrorDescription();
+        ASSERT_EQ(Connected, m_hackRf->CheckState()) << m_hackRf->GetLastErrorDescription();
     }
 
 protected:
-    hackrf_device*  m_device;
-    HackRfInterface m_hackRf;
+    HackRfInterface* m_hackRf;
 };
 
 TEST_F(HackRfInterfaceTest, StartAndStopStreaming)
 {
-    ASSERT_EQ(Connected, m_hackRf.CheckState()) << m_hackRf.GetLastErrorDescription();
+    ASSERT_EQ(Connected, m_hackRf->CheckState()) << m_hackRf->GetLastErrorDescription();
 
-    m_hackRf.StartReceiving();
-    EXPECT_EQ(Receiving, m_hackRf.CheckState()) << m_hackRf.GetLastErrorDescription();
-
-    m_hackRf.StopReceiving();
-    EXPECT_EQ(Connected, m_hackRf.CheckState()) << m_hackRf.GetLastErrorDescription();
+    m_hackRf->ReceiveNextFrame();
+    EXPECT_EQ(Receiving, m_hackRf->CheckState()) << m_hackRf->GetLastErrorDescription();
+    m_hackRf->WaitForNextFrame();
+    EXPECT_EQ(Connected, m_hackRf->CheckState()) << m_hackRf->GetLastErrorDescription();
 }
 
-TEST_F(HackRfInterfaceTest, StreamingData)
-{
-    m_hackRf.StartReceiving();
-    m_hackRf.StopReceiving();
-}

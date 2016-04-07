@@ -13,8 +13,7 @@ enum EHackRfState
     NotInitialized,
     NotConnected,
     Connected,
-    Receiving,
-    Transmitting
+    Receiving
 };
 
 struct AnalysisParameters;
@@ -22,15 +21,15 @@ struct AnalysisParameters;
 class HackRfInterface
 {
 public:
-    HackRfInterface(hackrf_device** device, hackrf_sample_block_cb_fn callback);
+    static HackRfInterface* GetInstance();
 
-    ~HackRfInterface();
+    bool ReceiveNextFrame();
+
+    void WaitForNextFrame();
+
+    bool SetCallbackFunction(hackrf_sample_block_cb_fn callback);
 
     bool SetAnalysisParameters(const AnalysisParameters& params);
-
-    bool StartReceiving();
-
-    bool StopReceiving();
 
     EHackRfState CheckState() const
     {
@@ -43,6 +42,17 @@ public:
     }
 
 private:
+    static HackRfInterface* s_instance;
+    volatile static bool    s_isNextFrameReady;
+
+    static int TransferCallback(hackrf_transfer* transfer);
+
+    HackRfInterface();
+
+    ~HackRfInterface();
+
+    bool FinalizeFrameReceive();
+
     void SetErrorString(const std::string description, const int errCode);
 
     bool IsConnected() const

@@ -2,12 +2,15 @@
 #include "AnalysisParameters.hpp"
 #include "Defaults.hpp"
 
-#include <cstring>
+HackRfInterface* HackRfInterface::s_instance         = NULL;
+volatile bool    HackRfInterface::s_isNextFrameReady = false;
 
-HackRfInterface::HackRfInterface(hackrf_device** device, hackrf_sample_block_cb_fn callback)
+hackrf_transfer g_lastTransferInfo;
+
+HackRfInterface::HackRfInterface()
     : m_device(NULL),
       m_state(UndefinedState),
-      m_rxCallback(callback)
+      m_rxCallback(TransferCallback)
 {
     int32_t status = hackrf_init();
     if(HACKRF_SUCCESS != hackrf_init())
@@ -30,15 +33,39 @@ HackRfInterface::HackRfInterface(hackrf_device** device, hackrf_sample_block_cb_
 
     if(status == HACKRF_SUCCESS)
     m_state = Connected;
-
-    *device = m_device;
 }
 
 HackRfInterface::~HackRfInterface()
 {
-    StopReceiving();
     hackrf_close(m_device);
     hackrf_exit();
+}
+
+HackRfInterface* HackRfInterface::GetInstance()
+{
+    if(s_instance != NULL)
+    {
+        return s_instance;
+    }
+    else
+    {
+        s_instance = new HackRfInterface();
+        return s_instance;
+    }
+}
+
+bool HackRfInterface::SetCallbackFunction(hackrf_sample_block_cb_fn callback)
+{
+    if(callback)
+    {
+        m_rxCallback = callback;
+        return true;
+    }
+    else
+    {
+        m_rxCallback = HackRfInterface::TransferCallback;
+        return false;
+    }
 }
 
 bool HackRfInterface::SetAnalysisParameters(const AnalysisParameters& params)
@@ -58,8 +85,9 @@ bool HackRfInterface::SetAnalysisParameters(const AnalysisParameters& params)
     return true;
 }
 
-bool HackRfInterface::StartReceiving()
+bool HackRfInterface::ReceiveNextFrame()
 {
+    s_isNextFrameReady = false;
     if(IsConnected())
     {
         int result = hackrf_start_rx(m_device, m_rxCallback, NULL);
@@ -77,30 +105,51 @@ bool HackRfInterface::StartReceiving()
     return false;
 }
 
-bool HackRfInterface::StopReceiving()
+int HackRfInterface::TransferCallback(hackrf_transfer* transfer)
 {
-    if(IsReceiving())
+    g_lastTransferInfo = *transfer;
+    s_instance->m_state = Connected;
+    s_isNextFrameReady = true;
+    return -1;
+}
+
+void HackRfInterface::WaitForNextFrame()
+{
+    // TODO add timeout to avoid infinite loop risk
+    while(s_isNextFrameReady != true)
     {
-        int result = hackrf_stop_rx(m_device);
-        if(result < 0)
-        {
-            SetErrorString("Receiving could not be stopped correctly: ", result);
-            m_state = UndefinedState;
-            return false;
-        }
-        else
-        {
-            m_state = Connected;
-            return true;
-        }
+        // wait longer
     }
-    return false;
+}
+
+bool HackRfInterface::FinalizeFrameReceive()
+{
+    m_state = Connected;
+    return true;
 }
 
 void HackRfInterface::SetErrorString(const std::string description, const int errCode)
 {
+    std::string state = "";
+    switch(m_state)
+    {
+        case UndefinedState:
+            state = "UndefinedState";
+            break;
+        case NotInitialized:
+            state = "NotInitialized";
+            break;
+        case NotConnected:
+            state = "NotConnected";
+            break;
+        case Connected:
+            state = "Connected";
+            break;
+        case Receiving:
+            state = "Receiving";
+            break;
+    }
     std::stringstream errorStream;
-    errorStream << "[HackRf] Error: " << description << hackrf_error_name(static_cast<hackrf_error>(errCode));
+    errorStream << "[HackRf] State: " << state << " Error: " << description << hackrf_error_name(static_cast<hackrf_error>(errCode));
     m_lastError = errorStream.str();
 }
-
