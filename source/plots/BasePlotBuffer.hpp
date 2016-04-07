@@ -9,17 +9,17 @@
 class BasePlotBuffer
 {
 public:
-    BasePlotBuffer(int             bufferSize,
-                 QVector<QPointF>& buffer,
-                 double            startFrequency,
-                 double            frequencyStep);
+    BasePlotBuffer(int               bufferSize,
+                   QVector<QPointF>& buffer,
+                   double            startFrequency,
+                   double            frequencyStep);
 
     virtual ~BasePlotBuffer() {}
 
     virtual void ResetValues();
     virtual void UpdateFrequencies(const double startFreq, const double freqStep);
-    virtual void UpdateValues() {}
-    virtual double GetGlobalMax() {}
+    virtual void UpdateValues() = 0;
+    virtual double GetGlobalMax() = 0;
 
 protected:
     QVector<QPointF>& m_buffer;

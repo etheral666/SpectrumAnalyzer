@@ -14,6 +14,29 @@
 
 using namespace testing;
 
+class PlotBuffer : public BasePlotBuffer
+{
+public:
+    PlotBuffer(int               bufferSize,
+               QVector<QPointF>& buffer,
+               double            startFrequency,
+               double            frequencyStep)
+        : BasePlotBuffer(bufferSize,
+                         buffer,
+                         startFrequency,
+                         frequencyStep)
+    {}
+
+    // no implementations required, since tested are only BasePlotBuffer functions
+    virtual void UpdateValues()
+    {}
+
+    virtual double GetGlobalMax()
+    {
+        return 0.f;
+    }
+};
+
 class PlotBufferTest : public Test
 {
 public:
@@ -23,10 +46,10 @@ public:
     {
         std::fill(rawData, rawData + BUFFERS_SIZE, c64(1, 1));
         buffer.insert(buffer.end(), BUFFERS_SIZE, QPointF(1, 1));
-        basePlotBuffer.reset(new BasePlotBuffer(BUFFERS_SIZE,
-                                                buffer,
-                                                startFrequency,
-                                                frequencyStep));
+        basePlotBuffer.reset(new PlotBuffer(BUFFERS_SIZE,
+                                            buffer,
+                                            startFrequency,
+                                            frequencyStep));
 
         CheckBufferInitialization();
     }
@@ -57,9 +80,9 @@ protected:
     const double startFrequency;
     const double frequencyStep;
 
-    c64                               rawData[BUFFERS_SIZE];
-    QVector<QPointF>                  buffer;
-    boost::scoped_ptr<BasePlotBuffer> basePlotBuffer;
+    c64                           rawData[BUFFERS_SIZE];
+    QVector<QPointF>              buffer;
+    boost::scoped_ptr<PlotBuffer> basePlotBuffer;
 };
 
 TEST_F(PlotBufferTest, ResetBuffer)

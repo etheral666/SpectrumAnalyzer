@@ -13,7 +13,9 @@ AbsBuffer::AbsBuffer(int               bufferSize,
 void AbsBuffer::UpdateValues()
 {
     for(int idx = 0; idx < m_buffer.size(); ++idx)
+    {
         m_buffer[idx].setY(std::abs(m_rawData[idx]));
+    }
 }
 
 double AbsBuffer::GetGlobalMax()
@@ -22,7 +24,9 @@ double AbsBuffer::GetGlobalMax()
     for(VecIterator it = m_buffer.begin(); it != m_buffer.end(); ++it)
     {
         if(it->y() > max)
+        {
             max = it->y();
+        }
     }
 
     return max;

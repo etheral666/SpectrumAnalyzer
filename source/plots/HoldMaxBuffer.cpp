@@ -7,8 +7,7 @@ HoldMaxBuffer::HoldMaxBuffer(int               bufferSize,
                              double            freqStep)
     : BasePlotBuffer(bufferSize, buffer, startFreq, freqStep),
       m_rawData(rawData)
-{
-}
+{}
 
 void HoldMaxBuffer::UpdateValues()
 {
@@ -16,7 +15,9 @@ void HoldMaxBuffer::UpdateValues()
     {
         const double rawAbs = std::abs(m_rawData[idx]);
         if(rawAbs > m_buffer[idx].y())
+        {
             m_buffer[idx].setY(rawAbs);
+        }
     }
 }
 
@@ -26,7 +27,9 @@ double HoldMaxBuffer::GetGlobalMax()
     for(VecIterator it = m_buffer.begin(); it != m_buffer.end(); ++it)
     {
         if(it->y() > max)
+        {
             max = it->y();
+        }
     }
 
     return max;

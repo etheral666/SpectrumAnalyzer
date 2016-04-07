@@ -20,7 +20,7 @@ public:
     virtual double GetGlobalMax();
 
 private:
-    c64*              m_rawData;
+    c64* m_rawData;
 };
 
 #endif // ABS_BUFFER_HPP

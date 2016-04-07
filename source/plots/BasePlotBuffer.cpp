@@ -1,4 +1,5 @@
 #include "BasePlotBuffer.hpp"
+#include <iostream>
 
 BasePlotBuffer::BasePlotBuffer(int               bufferSize,
                                QVector<QPointF>& buffer,
