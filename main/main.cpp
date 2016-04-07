@@ -1,18 +1,20 @@
 #include "MainWindow.hpp"
 #include "Process.hpp"
+#include "Constants.hpp"
 
 #include <QApplication>
+#include <iostream>
 
 int main(int argc, char *argv[])
 {
+#ifdef NO_GUI
     Process mainProcess;
-
     mainProcess.Start();
-
     return 0;
-//    QApplication a(argc, argv);
-//    MainWindow w;
-//    w.show();
-
-//    return a.exec();
+#else
+    QApplication a(argc, argv);
+    MainWindow w;
+    w.show();
+    return a.exec();
+#endif
 }
