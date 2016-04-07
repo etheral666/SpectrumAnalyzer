@@ -23,6 +23,8 @@ class HackRfInterface
 public:
     static HackRfInterface* GetInstance();
 
+    ~HackRfInterface(); //TODO check if destructor will be necessary
+
     bool ReceiveNextFrame();
 
     void WaitForNextFrame();
@@ -48,8 +50,6 @@ private:
     static int TransferCallback(hackrf_transfer* transfer);
 
     HackRfInterface();
-
-    ~HackRfInterface();
 
     bool FinalizeFrameReceive();
 
