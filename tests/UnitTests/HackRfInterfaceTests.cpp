@@ -25,11 +25,6 @@ public:
         CheckInitialization();
     }
 
-    ~HackRfInterfaceTest()
-    {
-        EXPECT_EQ(Connected, m_hackRf->CheckState()) << m_hackRf->GetLastErrorDescription();
-    }
-
     void CheckInitialization()
     {
         ASSERT_EQ(Connected, m_hackRf->CheckState()) << m_hackRf->GetLastErrorDescription();

@@ -9,8 +9,7 @@ hackrf_transfer g_lastTransferInfo;
 
 HackRfInterface::HackRfInterface()
     : m_device(NULL),
-      m_state(UndefinedState),
-      m_rxCallback(TransferCallback)
+      m_state(UndefinedState)
 {
     int32_t status = hackrf_init();
     if(HACKRF_SUCCESS != hackrf_init())
@@ -54,20 +53,6 @@ HackRfInterface* HackRfInterface::GetInstance()
     }
 }
 
-bool HackRfInterface::SetCallbackFunction(hackrf_sample_block_cb_fn callback)
-{
-    if(callback)
-    {
-        m_rxCallback = callback;
-        return true;
-    }
-    else
-    {
-        m_rxCallback = HackRfInterface::TransferCallback;
-        return false;
-    }
-}
-
 bool HackRfInterface::SetAnalysisParameters(const AnalysisParameters& params)
 {
     int result = hackrf_set_freq(m_device, params.centerFrequency);
@@ -90,7 +75,7 @@ bool HackRfInterface::ReceiveNextFrame()
     s_isNextFrameReady = false;
     if(IsConnected())
     {
-        int result = hackrf_start_rx(m_device, m_rxCallback, NULL);
+        int result = hackrf_start_rx(m_device, TransferCallback, NULL);
         if(result < 0)
         {
             SetErrorString("Receiving could not be started: ", result);
@@ -122,13 +107,7 @@ void HackRfInterface::WaitForNextFrame()
     }
 }
 
-bool HackRfInterface::FinalizeFrameReceive()
-{
-    m_state = Connected;
-    return true;
-}
-
-void HackRfInterface::SetErrorString(const std::string description, const int errCode)
+void HackRfInterface::SetErrorString(const std::string& description, const int errCode)
 {
     std::string state = "";
     switch(m_state)
